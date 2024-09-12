@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [name, setName] = useState('');
+  const [response, setResponse] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Simulate a backend API call
+    setResponse(`Registered successfully with name: ${name}`);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Registration Form</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="name">Name: </label>
+          <input
+            type="text"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+      <p>{response}</p>
     </div>
   );
 }
